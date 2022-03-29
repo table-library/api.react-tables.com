@@ -7,8 +7,7 @@ const app = express();
 app.use(cors());
 
 // in-memory cache
-// { data: [], expires: new Date() }
-const cache = {};
+const cache = {}; // { data: [], expires: new Date() }
 
 app.get('/', async (req, res) => {
   const hash = req.query.proxy;
@@ -27,6 +26,7 @@ app.get('/', async (req, res) => {
 
   let data;
 
+  // in case there is a request without a hash query
   if (!hash) {
     data = [];
   } else if (isCacheHit) {
@@ -69,5 +69,5 @@ app.get('/', async (req, res) => {
 });
 
 app.listen(3004, () =>
-  console.log(`no-rate-limit listening on port 3004!`)
+  console.log(`listening on port 3004!`)
 );
