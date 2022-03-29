@@ -27,7 +27,9 @@ app.get('/', async (req, res) => {
 
   let data;
 
-  if (isCacheHit) {
+  if (!hash) {
+    data = [];
+  } else if (isCacheHit) {
     console.log('cache hit');
     // get cached data
     data = cache[hash].data;
